@@ -1,0 +1,15 @@
+{% extends "profiles/user_base.html" %}
+{% load crispy_forms_tags %}
+{% block form_block %}
+
+<div class="content-section">
+    <h2>You have been Logged out</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">Already Have an account?
+            <a href="{% url 'login' %}">Login here</a>
+        </small>
+    </div>
+
+
+</div>
+{% endblock form_block %}
