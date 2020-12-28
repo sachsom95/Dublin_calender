@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
+from profiles import views as profile_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', include('profiles.urls')),
+    path('register/', profile_views.register, name='register'),
 ]

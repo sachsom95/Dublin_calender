@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # Profiles template register
     'profiles.apps.ProfilesConfig',
-
+    'crispy_forms',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -123,3 +123,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
