@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     # Profiles template register
     'profiles.apps.ProfilesConfig',
     'crispy_forms',
+    'calender.apps.CalenderConfig',
+
 
     'django.contrib.admin',
     'django.contrib.auth',
