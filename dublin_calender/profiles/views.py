@@ -7,6 +7,8 @@ from django.contrib import messages
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     return render(request, 'profiles/login.html')
 
 
