@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class Calender(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.CharField(max_length=50, default='')
     start_date = models.DateTimeField(default=timezone.now)
     end_date = models.DateTimeField(default=timezone.now)
