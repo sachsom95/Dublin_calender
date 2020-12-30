@@ -23,6 +23,8 @@ from django.urls import reverse
 
 urlpatterns = [
     path('', calender_views.home, name='home'),
-    path('event/new', calender_views.EventCreateView.as_view(),
+    path('event/new/', calender_views.EventCreateView.as_view(),
          name='event-create'),
+    path('event/<int:pk>/update/', calender_views.EventUpdateView.as_view(),
+         name='event-update'),
 ]
