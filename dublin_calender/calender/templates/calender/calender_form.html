@@ -92,14 +92,13 @@
 
                                 <div class="nav-item ">
 
-                                <a class="nav-link"  href="{% url 'logout' %}">
-                                        
-                                        <span
-                                            class="d-none d-lg-inline mr-2 text-gray-600 small">{{ request.user }}
+                                    <a class="nav-link" href="{% url 'logout' %}">
+
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small">{{ request.user }}
                                         </span>
 
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> &nbsp;Logout
-                                </a>
+                                    </a>
 
                                 </div>
 
@@ -112,104 +111,48 @@
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
                         <h3 class="text-dark mb-0">Calendar</h3>
-
-
-                        <a class="btn btn-primary btn-icon-split" role="button"><span class="text-white-50 icon"><i
-                                    class="fas fa-share-alt"></i></span><span class="text-white text">Share
-                                Calendar</span></a>
                     </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <div class="card shadow">
-                                <div class="card-header py-3">
-                                     <div class="row">
-                                    <div class="col-6 col-md-6">
-                                        <p class="text-primary m-0 font-weight-bold">Events Planned</p>
-                                    </div>
-                                    <div class="col-6 col-md-6" style="text-align: right;"><a href = "/event/new" class="btn btn-info text-right btn-circle ml-1" role="button" style="background: var(--blue);border-color: var(--blue);"><i class="fas fa-plus text-white" style="font-size: 21px;"></i></a></div>
-                                </div>
-                                </div>
 
+                    <!-- Put here the form -->
 
+                    <div class="content-section">
+                        <form method="POST">
+                            <!--CSRF token -> Cross Site Request Forgery Token-->
+                            {% csrf_token %}
 
+                            <fieldset class="form-group">
+                                <legend class="border-bottom mb-4">Event</legend>
 
-                                
-                                <div class="card-body">
-                                    <div class="table-responsive table mt-lg-auto" id="dataTable-1" role="grid"
-                                        aria-describedby="dataTable_info">
-                                        <table class="table my-0" id="dataTable">
+                                {{ form | crispy }}
 
-                                            <thead>
-                                                <tr>
+                            </fieldset>
 
-                                                    <th>Event</th>
-                                                    <th>Description</th>
-                                                </tr>
-                                            </thead>
-
-
-                                            <!-- This is where we insert the loop -->
-{% for x in events %}
-
-<tr>
-    <td>
-        <div class="col mr-2">
-            <h6 class="mb-0" style="margin-top: 2px;"><strong> {{ x.event }}</strong></h6>
-            <h6 class="mb-0" style="font-size: 11px;height: 12px;margin-top: 6px;">
-                <strong>{{ x.start_date|date:"d F Y" }} - {{ x.end_date|date:"d F Y" }}</strong>
-            </h6 ><span class="text-xs">{{ x.start_date|date:"G:i A" }} - {{ x.end_date|date:"G:i A" }}</span>
-                                            <!-- buttons -->
-            <h6 class="mb-0" style="margin-top: 2px;">
-                <span class="text-xs">
-                    <button class="btn btn-primary" type="button" style="color: var(--blue);background: rgba(78,115,223,0);border-color: var(--light);">
-                        <i class="fa fa-remove" style="color: var(--blue);border-color: var(--white);"></i>
-                    </button>
-                </span>
-
-                <span class="text-xs">
-                    <button class="btn btn-primary" type="button" style="background: rgba(78,115,223,0);border-color: rgba(255,255,255,0);">
-                            <i class="fa fa-edit" style="color: var(--blue);border-color: var(--white);"></i>
-                    </button>
-                </span>
-            </h6>
-                                            <!-- buttons -->
-
-
-        </div>
-    </td>
-    <td>
-        <div class="col mr-2">
-            <p
-                style="min-width: 21px;font-size: 14px;text-align: left;min-height: 10px;max-width: 210px;margin-right: 0px;margin-left: 0px;padding: 0px;padding-left: 0px;">
-                {{ x.description }}
-            </p>
-        </div>
-    </td>
-</tr>
-
-{% endfor %}
-                                            <!-- End loop here -->
-
-
-                                            </tbody>
-                                            <tfoot>
-                                                <tr></tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <button class="btn btn-outline-info" type="submit">Add Event</button>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
+
+
+                    <!-- Form -->
+
+
+
                 </div>
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Dublin Calendar 2020</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <footer class="bg-white sticky-footer">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © Dublin Calendar 2020</span></div>
+        </div>
+    </footer>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <div class="card shadow"></div>
     <script src="{% static 'profiles/assets/js/jquery.min.js' %}"></script>
@@ -225,7 +168,7 @@
 
 
 
-{% comment %} 
+{% comment %}
 This is the for loop template
 
 

@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views as calender_views
+from django.urls import reverse
 
+# class based view
+# path('', calender_views.PostListView.as_view(), name='home'),
 
 urlpatterns = [
     path('', calender_views.home, name='home'),
-
+    path('event/new', calender_views.EventCreateView.as_view(),
+         name='event-create'),
 ]
