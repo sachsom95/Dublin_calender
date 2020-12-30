@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Dublin Calendar</title>
+    <link rel="stylesheet" href="{% static 'profiles/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="{% static 'profiles/assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'profiles/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'profiles/assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'profiles/assets/css/untitled.css' %}">
+</head>
+
+
+
+<body id="page-top">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+
+                        <ul class="nav navbar-nav flex-nowrap ml-auto">
+
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+
+
+                                <div class="nav-item ">
+
+                                    <a class="nav-link" href="{% url 'logout' %}">
+
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small">{{ request.user }}
+                                        </span>
+
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> &nbsp;Logout
+                                    </a>
+
+                                </div>
+
+
+
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+
+
+                    <!-- Put here the form -->
+
+                    <div class="content-section">
+                        <form method="POST">
+                            <!--CSRF token -> Cross Site Request Forgery Token-->
+                            {% csrf_token %}
+
+                            <fieldset class="form-group">
+                                <legend class="border-bottom mb-4">Delete Event</legend>
+
+                                <h2> Are you sure you want to delete the Event? </h2>
+
+                            </fieldset>
+
+                            <div class="form-group">
+                                <button class="btn btn-outline-danger" type="submit">Delete Event</button>
+                                <a class="btn btn-outline-secondary" href="{% url 'home' %}">No Take me back</a>
+
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                    <!-- Form -->
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <footer class="bg-white sticky-footer">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © Dublin Calendar 2020</span></div>
+        </div>
+    </footer>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <div class="card shadow"></div>
+    <script src="{% static 'profiles/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'profiles/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="{% static 'profiles/assets/js/theme.js' %}"></script>
+</body>
+
+</html>

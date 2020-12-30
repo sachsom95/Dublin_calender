@@ -27,4 +27,6 @@ urlpatterns = [
          name='event-create'),
     path('event/<int:pk>/update/', calender_views.EventUpdateView.as_view(),
          name='event-update'),
+    path('event/<int:pk>/delete/', calender_views.EventDeleteView.as_view(),
+         name='event-delete'),
 ]

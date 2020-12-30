@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from profiles.models import Calender
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse
 # for our class to have same login required ability
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -48,6 +48,20 @@ class EventUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
 
     def test_func(self):
         # get post we update
+        event = self.get_object()
+        if self.request.user == event.user:
+            return True
+        return False
+
+# delete view
+
+
+class EventDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Calender
+    success_url = "/"
+
+    def test_func(self):
+        # check if user loggedin
         event = self.get_object()
         if self.request.user == event.user:
             return True
