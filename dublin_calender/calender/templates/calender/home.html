@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Dublin Calendar</title>
+    <title>Dublin Calendar</title>
     <link rel="stylesheet" href="{% static 'profiles/assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -47,60 +47,23 @@
                                     </form>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                        data-toggle="dropdown" aria-expanded="false" href="#"><span
-                                            class="badge badge-danger badge-counter">3+</span><i
-                                            class="fas fa-bell fa-fw"></i></a>
-                                    <div
-                                        class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in">
-                                        <h6 class="dropdown-header">alerts center</h6><a
-                                            class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-primary icon-circle"><i
-                                                        class="fas fa-file-alt text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 12, 2019</span>
-                                                <p>A new monthly report is ready to download!</p>
-                                            </div>
-                                        </a><a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-success icon-circle"><i
-                                                        class="fas fa-donate text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 7, 2019</span>
-                                                <p>$290.29 has been deposited into your account!</p>
-                                            </div>
-                                        </a><a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-warning icon-circle"><i
-                                                        class="fas fa-exclamation-triangle text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 2, 2019</span>
-                                                <p>Spending Alert: We've noticed unusually high spending for your
-                                                    account.</p>
-                                            </div>
-                                        </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All
-                                            Alerts</a>
-                                    </div>
-                                </div>
-                            </li>
+                           
 
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
 
 
                                 <div class="nav-item ">
-
+                                {% if not shared %}
+                                {% comment %} <div id = "username">{{ request.user }} </div> {% endcomment %}
                                 <a class="nav-link"  href="{% url 'logout' %}">
                                         
-                                        <span
-                                            class="d-none d-lg-inline mr-2 text-gray-600 small">{{ request.user }}
-                                        </span>
+                                        <span id ="username"
+                                            class="d-none d-lg-inline mr-2 text-gray-600 small">{{ request.user }}</span>
 
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> &nbsp;Logout
                                 </a>
-
+                                {% endif %}
                                 </div>
 
 
@@ -110,14 +73,31 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+
+
+                 {% if not shared %}
+                        <div class="d-sm-flex justify-content-between align-items-center mb-4">
                         <h3 class="text-dark mb-0">Calendar</h3>
 
 
-                        <a class="btn btn-primary btn-icon-split" role="button"><span class="text-white-50 icon"><i
+                    
+                                        
+                        <button class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#sharable_link" role="button" onclick="get_shareable_link()" data-target="#share_modal"><span class="text-white-50 icon"><i
                                     class="fas fa-share-alt"></i></span><span class="text-white text">Share
-                                Calendar</span></a>
+                                Calendar</span></button>
                     </div>
+                
+                {% else %}
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">Looking at the shared calender of {{ username }}</h3>
+                    </div>
+                {% endif %}
+
+                    
+
+
+
+
 
                     <div class="row">
                         <div class="col">
@@ -160,6 +140,7 @@
                 <strong>{{ x.start_date|date:"d F Y" }} - {{ x.end_date|date:"d F Y" }}</strong>
             </h6 ><span class="text-xs">{{ x.start_date|date:"G:i A" }} - {{ x.end_date|date:"G:i A" }}</span>
                                             <!-- buttons -->
+            {% if not shared %}
             <h6 class="mb-0" style="margin-top: 2px;">
                 <span class="text-xs">
                     <a class="btn btn-primary" href={% url 'event-delete' x.id %} style="color: var(--blue);background: rgba(78,115,223,0);border-color: var(--light);">
@@ -173,6 +154,7 @@
                     </a>
                 </span>
             </h6>
+            {% endif %}
                                             <!-- buttons -->
 
 
@@ -212,10 +194,47 @@
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <div class="card shadow"></div>
+
+
+<!-- Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="sharable_link" tabindex="-1" role="dialog" aria-labelledby="share_modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Link generated copy this and sent to share Calender </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="link_paragraph" style="word-wrap: break-word;"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        {% comment %} <button type="button" class="btn btn-primary" onclick="copy_link()" data-dismiss="modal">Copy to clipboard</button> {% endcomment %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  -->
+
+
+
+
+<!-- Modal -->
+
+    
     <script src="{% static 'profiles/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'profiles/assets/js/share.js' %}"></script>
     <script src="{% static 'profiles/assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="{% static 'profiles/assets/js/theme.js' %}"></script>
+    {% comment %} <script>
+        $('#sharable_link').modal('show')
+    </script> {% endcomment %}
 </body>
 
 </html>

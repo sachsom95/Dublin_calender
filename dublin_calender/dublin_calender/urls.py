@@ -27,4 +27,6 @@ urlpatterns = [
     path('register/', profile_views.register, name='register'),
     path('home/', include('calender.urls')),
     path('', include('calender.urls')),
+    path('share/', include('calender.urls')),
+
 ]

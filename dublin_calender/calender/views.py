@@ -18,12 +18,16 @@ def home(request):
     return render(request, 'calender/home.html', context)
 
 
-# Testing class based views
-# class PostListView(ListView):
-#     model = Calender
-#     template_name = 'calender/home.html'
-#     queryset = Calender.objects.filter(user__username=request.user)
-#     context_object_name = 'events'
+def share(request, user_name):
+
+    events = Calender.objects.filter(user__username=user_name)
+    print(events)
+    context = {'events': events,
+               'shared': True,
+               'username': user_name
+               }
+    return render(request, 'calender/home.html', context)
+
 
 # CreateView
 class EventCreateView(LoginRequiredMixin, CreateView):
