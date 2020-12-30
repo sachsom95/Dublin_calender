@@ -19,6 +19,7 @@ from django.http import HttpResponse
 from profiles import views as profile_views
 from django.contrib.auth import views as auth_views
 import calender
+from calender import views as calender_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('register/', profile_views.register, name='register'),
     path('home/', include('calender.urls')),
     path('', include('calender.urls')),
-    path('share/', include('calender.urls')),
+    # path('share/', include('calender.urls')),
+    path('share/<str:user_name>/', calender_views.share, name='share'),
 
 ]
