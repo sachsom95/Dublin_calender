@@ -1,0 +1,1 @@
+web: gunicorn dublin_calender.wsgi
