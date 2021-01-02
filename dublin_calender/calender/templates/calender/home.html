@@ -6,13 +6,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dublin Calendar</title>
-    <link rel="stylesheet" href="{% static 'profiles/assets/bootstrap/css/bootstrap.min.css' %}">
+<script src="https://unpkg.com/intro.js/minified/intro.min.js" defer></script> 
+    <link rel="stylesheet" href="{% static 'profiles/assets/bootstrap/css/bootstrap.min.css' %}" defer>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="{% static 'profiles/assets/fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'profiles/assets/fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'profiles/assets/fonts/fontawesome5-overrides.min.css' %}">
     <link rel="stylesheet" href="{% static 'profiles/assets/css/untitled.css' %}">
+            <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css" defer>
+
+    
 </head>
 
 
@@ -24,9 +28,8 @@
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3"
                             id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <form
-                            class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text"
+                        <form  class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div id="search_tour" class="input-group"><input class="bg-light form-control border-0 small" type="text"
                                     placeholder="Search for ...">
                                 <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i
                                             class="fas fa-search"></i></button></div>
@@ -56,7 +59,7 @@
                                 <div class="nav-item ">
                                 {% if not shared %}
                                 {% comment %} <div id = "username">{{ request.user }} </div> {% endcomment %}
-                                <a class="nav-link"  href="{% url 'logout' %}">
+                                <a id="logout_tour" class="nav-link"  href="{% url 'logout' %}">
                                         
                                         <span id ="username"
                                             class="d-none d-lg-inline mr-2 text-gray-600 small">{{ request.user }}</span>
@@ -81,8 +84,8 @@
 
 
                     
-                                        
-                        <button class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#sharable_link" role="button" onclick="get_shareable_link()" data-target="#share_modal"><span class="text-white-50 icon"><i
+                                   
+                        <button id="share_tour" class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#sharable_link" role="button" onclick="get_shareable_link()" data-target="#share_modal"><span class="text-white-50 icon"><i
                                     class="fas fa-share-alt"></i></span><span class="text-white text">Share
                                 Calendar</span></button>
                     </div>
@@ -105,9 +108,9 @@
                                 <div class="card-header py-3">
                                      <div class="row">
                                     <div class="col-6 col-md-6">
-                                        <p class="text-primary m-0 font-weight-bold">Events Planned</p>
+                                        <p  class="text-primary m-0 font-weight-bold">Events Planned</p>
                                     </div>
-                                    <div class="col-6 col-md-6" style="text-align: right;"><a href = "/event/new" class="btn btn-info text-right btn-circle ml-1" role="button" style="background: var(--blue);border-color: var(--blue);"><i class="fas fa-plus text-white" style="font-size: 21px;"></i></a></div>
+                                    <div class="col-6 col-md-6" style="text-align: right;"><a id="add_tour" href = "/event/new" class="btn btn-info text-right btn-circle ml-1" role="button" style="background: var(--blue);border-color: var(--blue);"><i class="fas fa-plus text-white" style="font-size: 21px;"></i></a></div>
                                 </div>
                                 </div>
 
@@ -143,13 +146,13 @@
             {% if not shared %}
             <h6 class="mb-0" style="margin-top: 2px;">
                 <span class="text-xs">
-                    <a class="btn btn-primary" href={% url 'event-delete' x.id %} style="color: var(--blue);background: rgba(78,115,223,0);border-color: var(--light);">
+                    <a id="delete_tour" class="btn btn-primary" href={% url 'event-delete' x.id %} style="color: var(--blue);background: rgba(78,115,223,0);border-color: var(--light);">
                         <i class="fa fa-remove" style="color: var(--blue);border-color: var(--white);"></i>
                     </a>
                 </span>
 
                 <span class="text-xs">
-                    <a class="btn btn-primary" href={% url 'event-update' x.id %} style="background: rgba(78,115,223,0);border-color: rgba(255,255,255,0);">
+                    <a id="edit_tour" class="btn btn-primary" href={% url 'event-update' x.id %} style="background: rgba(78,115,223,0);border-color: rgba(255,255,255,0);">
                             <i class="fa fa-edit" style="color: var(--blue);border-color: var(--white);"></i>
                     </a>
                 </span>
@@ -232,6 +235,8 @@
     <script src="{% static 'profiles/assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="{% static 'profiles/assets/js/theme.js' %}"></script>
+   
+    <script src="{% static 'profiles/assets/js/tour.js' %}" defer></script>
     {% comment %} <script>
         $('#sharable_link').modal('show')
     </script> {% endcomment %}
