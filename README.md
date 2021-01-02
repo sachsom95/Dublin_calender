@@ -5,7 +5,7 @@
 NOTE : for project tasks look here
 [Project!!](https://github.com/sachsom95/Dublin_calender/projects/2)
 
-### This is DDublin calendar the latest spaghetti creation.. 
+### This is Dublin calendar the latest spaghetti creation.. 
 Keep record of events in a calendar without an entire calender being shoved to the screen. Shows events, dates and descriptions.  Deployed in Heroku with postgres<p align="center">
   <p align="center">
   <img width="600" height="400"src="https://user-images.githubusercontent.com/55349036/103449320-7667f400-4c9e-11eb-881f-35bbcfc47e4a.gif">
